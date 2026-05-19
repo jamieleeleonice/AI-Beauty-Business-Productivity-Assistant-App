@@ -122,10 +122,10 @@ function ChatThreadInner({
           {status === "submitted" && (
             <Message from="assistant">
               <MessageContent>
-                <Shimmer className="inline-flex items-center gap-2 text-sm">
+                <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
                   <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  Thinking…
-                </Shimmer>
+                  <Shimmer className="text-sm">Thinking…</Shimmer>
+                </div>
               </MessageContent>
             </Message>
           )}
