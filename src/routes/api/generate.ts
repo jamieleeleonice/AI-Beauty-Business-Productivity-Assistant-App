@@ -6,7 +6,7 @@ import { createLovableAiGatewayProvider, DEFAULT_MODEL } from "@/lib/ai-gateway"
 
 const BodySchema = z.object({
   task: z.enum(["email", "summarize", "plan", "research"]),
-  payload: z.record(z.any()),
+  payload: z.record(z.string(), z.any()),
 });
 
 function buildPrompt(task: string, p: Record<string, unknown>): { system: string; prompt: string } {
