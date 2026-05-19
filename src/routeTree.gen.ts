@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ResearchRouteImport } from './routes/research'
 import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as EmailRouteImport } from './routes/email'
@@ -16,6 +17,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiGenerateRouteImport } from './routes/api/generate'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
+const ResearchRoute = ResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlannerRoute = PlannerRouteImport.update({
   id: '/planner',
   path: '/planner',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/email': typeof EmailRoute
   '/notes': typeof NotesRoute
   '/planner': typeof PlannerRoute
+  '/research': typeof ResearchRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/email': typeof EmailRoute
   '/notes': typeof NotesRoute
   '/planner': typeof PlannerRoute
+  '/research': typeof ResearchRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/email': typeof EmailRoute
   '/notes': typeof NotesRoute
   '/planner': typeof PlannerRoute
+  '/research': typeof ResearchRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
 }
@@ -79,16 +88,25 @@ export interface FileRouteTypes {
     | '/email'
     | '/notes'
     | '/planner'
+    | '/research'
     | '/api/chat'
     | '/api/generate'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/email' | '/notes' | '/planner' | '/api/chat' | '/api/generate'
+  to:
+    | '/'
+    | '/email'
+    | '/notes'
+    | '/planner'
+    | '/research'
+    | '/api/chat'
+    | '/api/generate'
   id:
     | '__root__'
     | '/'
     | '/email'
     | '/notes'
     | '/planner'
+    | '/research'
     | '/api/chat'
     | '/api/generate'
   fileRoutesById: FileRoutesById
@@ -98,12 +116,20 @@ export interface RootRouteChildren {
   EmailRoute: typeof EmailRoute
   NotesRoute: typeof NotesRoute
   PlannerRoute: typeof PlannerRoute
+  ResearchRoute: typeof ResearchRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiGenerateRoute: typeof ApiGenerateRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/research': {
+      id: '/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/planner': {
       id: '/planner'
       path: '/planner'
@@ -154,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmailRoute: EmailRoute,
   NotesRoute: NotesRoute,
   PlannerRoute: PlannerRoute,
+  ResearchRoute: ResearchRoute,
   ApiChatRoute: ApiChatRoute,
   ApiGenerateRoute: ApiGenerateRoute,
 }
