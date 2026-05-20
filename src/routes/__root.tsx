@@ -86,7 +86,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "AI assistant for salons, skincare consultants and beauty businesses. Draft emails, summarize meetings, plan tasks and research trends.",
       },
-      { property: "og:title", content: "Lumen Beauty — AI Productivity Studio" },
+      { property: "og:title", content: "Lumen Beauty — AI Productivity for Beauty Pros" },
       {
         property: "og:description",
         content:
@@ -95,6 +95,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Lumen Beauty — AI Productivity for Beauty Pros" },
+      { name: "description", content: "AI Beauty Pro automates tasks for beauty professionals and small businesses with AI-powered tools." },
+      { property: "og:description", content: "AI Beauty Pro automates tasks for beauty professionals and small businesses with AI-powered tools." },
+      { name: "twitter:description", content: "AI Beauty Pro automates tasks for beauty professionals and small businesses with AI-powered tools." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2ee55a55-c881-440a-879a-68b953dbd786/id-preview-cb66275f--4d4734b2-bfe7-45aa-b9a6-ec7116db8109.lovable.app-1779262302050.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2ee55a55-c881-440a-879a-68b953dbd786/id-preview-cb66275f--4d4734b2-bfe7-45aa-b9a6-ec7116db8109.lovable.app-1779262302050.png" },
     ],
     links: [
       {
