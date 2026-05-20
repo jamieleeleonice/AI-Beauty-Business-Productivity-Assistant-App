@@ -27,6 +27,7 @@ import {
   getThread,
   upsertThread,
 } from "@/lib/chat-threads";
+import { recordStat } from "@/lib/stats";
 
 export const Route = createFileRoute("/chat/$threadId")({
   component: ChatThread,
@@ -99,8 +100,8 @@ function ChatThreadInner({
           {messages.length === 0 && (
             <ConversationEmptyState
               icon={<MessageCircleHeart className="h-8 w-8 text-primary" />}
-              title="Ask Lumen anything"
-              description="Ingredients, retention ideas, product launches, treatment protocols — your beauty business co-pilot is ready."
+              title="Ask Leonice anything"
+              description="Client communication, scheduling, beauty trends, treatments, marketing ideas, and workplace productivity — your AI co-pilot is ready."
             />
           )}
 
@@ -141,6 +142,7 @@ function ChatThreadInner({
               if (!trimmed || isLoading) return;
               setInput("");
               await sendMessage({ text: trimmed });
+              recordStat("chat");
             }}
           >
             <PromptInputTextarea
