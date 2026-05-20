@@ -28,12 +28,13 @@ function ChatIndex() {
           <Sparkles className="h-6 w-6" />
         </span>
         <h1 className="mt-5 font-serif text-3xl text-foreground">
-          Meet Lumen
+          Meet Leonice AI Workplace Assistant
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Your AI workplace assistant for beauty professionals. Ask about
-          ingredients, treatments, client retention, marketing or anything else
-          on your mind.
+          Meet Leonice AI Workplace Assistant — your intelligent workplace
+          productivity companion for beauty professionals. Ask about client
+          communication, scheduling, beauty trends, treatments, marketing
+          ideas, and workplace productivity tasks.
         </p>
         <Button className="mt-6" onClick={start}>
           <Plus className="h-4 w-4" /> Start a conversation
