@@ -3,6 +3,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Copy, RefreshCw, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Progress } from "@/components/ui/progress";
+import { Shimmer } from "@/components/ai-elements/shimmer";
+import { recordStat, type StatKey } from "@/lib/stats";
 
 export function AiOutput({
   value,
@@ -19,6 +22,19 @@ export function AiOutput({
 }) {
   const [internal, setInternal] = useState(value);
   useEffect(() => setInternal(value), [value]);
+
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    if (!loading) {
+      setProgress(0);
+      return;
+    }
+    setProgress(8);
+    const id = window.setInterval(() => {
+      setProgress((p) => (p >= 92 ? 92 : p + Math.max(1, (95 - p) / 12)));
+    }, 240);
+    return () => window.clearInterval(id);
+  }, [loading]);
 
   return (
     <div className="flex flex-col gap-3">
@@ -53,6 +69,15 @@ export function AiOutput({
           </Button>
         </div>
       </div>
+      {loading && (
+        <div className="flex flex-col gap-2 rounded-lg border border-border/60 bg-secondary/40 px-4 py-3">
+          <div className="flex items-center gap-2 text-sm">
+            <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
+            <Shimmer className="text-sm">Drafting your response…</Shimmer>
+          </div>
+          <Progress value={progress} className="h-1.5" />
+        </div>
+      )}
       <Textarea
         value={internal}
         onChange={(e) => {
@@ -71,7 +96,7 @@ export function AiOutput({
 }
 
 export async function callGenerate(
-  task: "email" | "summarize" | "plan" | "research",
+  task: Extract<StatKey, "email" | "summarize" | "plan" | "research">,
   payload: Record<string, unknown>
 ): Promise<string> {
   const res = await fetch("/api/generate", {
@@ -91,5 +116,6 @@ export async function callGenerate(
     throw new Error(msg);
   }
   const data = (await res.json()) as { text: string };
+  recordStat(task);
   return data.text;
 }

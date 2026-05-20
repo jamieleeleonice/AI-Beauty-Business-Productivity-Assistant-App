@@ -7,6 +7,7 @@ import {
   Sparkles,
   MessageCircleHeart,
   Flower2,
+  ShieldCheck,
 } from "lucide-react";
 import {
   Sidebar,
@@ -28,6 +29,13 @@ const navItems = [
   { title: "Task Planner", url: "/planner", icon: CalendarCheck },
   { title: "Research Assistant", url: "/research", icon: Sparkles },
   { title: "Chat Assistant", url: "/chat", icon: MessageCircleHeart },
+];
+
+const responsibleAi = [
+  "AI outputs may contain inaccuracies",
+  "Users should verify information",
+  "Human review is recommended before business decisions",
+  "Recommendations do not replace medical or professional advice",
 ];
 
 export function AppSidebar() {
@@ -74,6 +82,23 @@ export function AppSidebar() {
                 );
               })}
             </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+          <SidebarGroupLabel className="flex items-center gap-1.5">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            Responsible AI
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <ul className="space-y-1.5 px-2 pb-2 pt-1 text-[11px] leading-snug text-sidebar-foreground/70">
+              {responsibleAi.map((line) => (
+                <li key={line} className="flex gap-1.5">
+                  <span aria-hidden className="mt-1 inline-block h-1 w-1 shrink-0 rounded-full bg-primary" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
